@@ -18,35 +18,37 @@ public class Program {
         ChessMath chessMath = new ChessMath();
         List<ChessPiece> captured = new ArrayList<>();
 
-        while(true){
+        while (!chessMath.getCheckMate()) {
             try {
                 UI.clearScreen();
-                UI.printMatch(chessMath,captured);
+                UI.printMatch(chessMath, captured);
                 System.out.println();
                 System.out.println("Source: ");
                 ChessPosition source = UI.readChessPosition(sc);
                 boolean[][] possibleMoves = chessMath.possibleMoves(source);
                 UI.clearScreen();
-                UI.printBoard(chessMath.getPieces(),possibleMoves);
+                UI.printBoard(chessMath.getPieces(), possibleMoves);
                 System.out.println();
                 System.out.println("Target: ");
                 ChessPosition target = UI.readChessPosition(sc);
 
-                ChessPiece capturedPiece = chessMath.performChessMove(source,target);
+                ChessPiece capturedPiece = chessMath.performChessMove(source, target);
 
-                if(capturedPiece != null){
+                if (capturedPiece != null) {
                     captured.add(capturedPiece);
                 }
 
-            }catch (ChessException e){
+            } catch (ChessException e) {
                 System.out.println(e.getMessage());
                 sc.nextLine();
-            }catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
 
         }
+        UI.clearScreen();
+        UI.printMatch(chessMath,captured);
     }
 
 }
