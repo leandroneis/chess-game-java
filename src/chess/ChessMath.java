@@ -5,7 +5,6 @@ import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.*;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -119,16 +118,16 @@ public class ChessMath {
             throw new IllegalStateException("There is no piece to be promoted");
         }
         if (!type.equals("B") && !type.equals("N") && !type.equals("R") && !type.equals("Q")) {
-            throw new InvalidParameterException("Invalid type for promotion");
+            return promoted;
         }
 
         Position pos = promoted.getChessPosition().toPosition();
         Piece p = board.removePiece(pos);
         piecesOnTheBoard.remove(p);
 
-        ChessPiece newPiece = newPiece(type,promoted.getColor());
+        ChessPiece newPiece = newPiece(type, promoted.getColor());
 
-        board.placePiece(newPiece,pos);
+        board.placePiece(newPiece, pos);
 
         piecesOnTheBoard.add(newPiece);
 
@@ -365,7 +364,5 @@ public class ChessMath {
         placeNewPiece('f', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('g', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('h', 7, new Pawn(board, Color.BLACK, this));
-
-
     }
 }
