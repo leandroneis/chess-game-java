@@ -26,6 +26,7 @@ hs_err_pid*
 *.iws
 *.iml
 *.ipr
+*.out
 
 ### VS Code ###
 .vscode/
